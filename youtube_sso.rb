@@ -3,27 +3,31 @@ require 'uri'
 require 'rubygems'
 require 'hpricot'
 
-def valid?(username, password)
-  response = Net::HTTP.post_form(URI.parse('http://www.youtube.com/login'),
-    {
-      'username' => username,
-      'password' => password,
-      'current_form' => 'loginForm',
-      'next' => '/',
-      'action_login' => 'Log+In'
-    })
-  page = Hpricot(response.body)
-  denial = page.search("div[@class='errorBox']")
-  acceptance = page.search("a[@class='noul']")
-  if denial.empty?
-    if acceptance.empty?
-      return page # fubar
-    else
-      return true
+class YouTubeSSO
+  class << self
+    def valid?(username, password)
+      response = Net::HTTP.post_form(URI.parse('http://www.youtube.com/login'),
+        {
+          'username' => username,
+          'password' => password,
+          'current_form' => 'loginForm',
+          'next' => '/',
+          'action_login' => 'Log+In'
+        })
+      page = Hpricot(response.body)
+      denial = page.search("div[@class='errorBox']")
+      acceptance = page.search("a[@class='noul']")
+      if denial.empty?
+        if acceptance.empty?
+          return page # fubar
+        else
+          return true
+        end
+      else
+        return false
+      end
     end
-  else
-    return false
   end
 end
 
-pp valid?(ARGV[0], ARGV[1])
+pp YouTubeSSO.valid?(ARGV[0], ARGV[1])
