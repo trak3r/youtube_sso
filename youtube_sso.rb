@@ -17,7 +17,6 @@ class YouTubeSSO
         })
       page = Hpricot(response.body)
       denial = page.search("div[@class='errorBox']")
-      acceptance = page.search("a[@class='noul']")
       if denial.empty?
         if "http://www.youtube.com/#{target}" == response['location']
           return true
