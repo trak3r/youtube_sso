@@ -29,5 +29,3 @@ class YouTubeSSO
     end
   end
 end
-
-pp YouTubeSSO.valid?(ARGV[0], ARGV[1])
