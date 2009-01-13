@@ -12,5 +12,5 @@ Gem::Specification.new do |s|
   s.test_files = []
   s.rdoc_options = []
   s.extra_rdoc_files = []
-  s.add_dependency("hpricot", [">= 0.6.164"])
+  #s.add_dependency("hpricot", [">= 0.6.164"])
 end

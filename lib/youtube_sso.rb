@@ -1,7 +1,4 @@
 require 'net/http'
-require 'uri'
-require 'rubygems'
-require 'hpricot'
 
 class YouTubeSSO
   class << self
@@ -15,14 +12,8 @@ class YouTubeSSO
           'next' => "/#{target}",
           'action_login' => 'Log+In'
         })
-      page = Hpricot(response.body)
-      denial = page.search("div[@class='errorBox']")
-      if denial.empty?
-        if "http://www.youtube.com/#{target}" == response['location']
-          return true
-        else
-          return response # for debugging
-        end
+      if "http://www.youtube.com/#{target}" == response['location']
+        return true
       else
         return false
       end
