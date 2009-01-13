@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = "youtube_sso"
-  s.version  = "0.0.1"
+  s.version  = "0.0.2"
   s.date     = "2000-01-13"
   s.summary  = "Poor-man's single sign-on for YouTube"
   s.email    = "youtube_sso@rudiment.net"
